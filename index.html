@@ -7,7 +7,9 @@
     <style>
       /* --- Variables globales --- */
       :root {
-        --bg-color: #000814;
+        --bg1: #000814;
+        --bg2: #001d3d;
+        --bg3: #003566;
         --text-color: #00e5ff;
         --accent-color: #25d366;
         --accent-hover: #1ebe5d;
@@ -18,36 +20,52 @@
         box-sizing: border-box;
       }
 
+      /* --- Fondo con degradado suave animado --- */
       body {
-        background-color: var(--bg-color);
-        color: var(--text-color);
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        min-height: 100vh;
-        margin: 0;
-        padding: 20px;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: var(--text-color);
         text-align: center;
+        background: linear-gradient(-45deg, var(--bg1), var(--bg2), var(--bg3), var(--bg2));
+        background-size: 400% 400%;
+        animation: gradient 12s ease infinite;
       }
 
-      /* --- Imagen principal --- */
+      @keyframes gradient {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      /* --- Imagen principal (logo) --- */
       .logo {
-        width: clamp(180px, 40vw, 500px);
+        width: clamp(200px, 45vw, 550px);
         height: auto;
-        margin-top: 40px;
-        border-radius: 12px;
+        margin: 20px auto;
         object-fit: contain;
+        border-radius: 16px;
         transition: transform 0.3s ease, filter 0.3s ease;
+        display: block;
       }
 
       .logo:hover {
-        transform: scale(1.03);
+        transform: scale(1.04);
         filter: brightness(1.1);
       }
 
-      /* --- Botón de WhatsApp --- */
+      /* --- Botón WhatsApp --- */
       .whatsapp {
         display: inline-flex;
         align-items: center;
@@ -61,7 +79,7 @@
         padding: 14px 28px;
         border-radius: 40px;
         transition: background-color 0.3s ease, transform 0.2s ease;
-        box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3);
+        box-shadow: 0 4px 12px rgba(37, 211, 102, 0.35);
       }
 
       .whatsapp:hover {
@@ -75,6 +93,7 @@
         margin-right: 10px;
       }
 
+      /* --- Footer --- */
       footer {
         margin-top: 60px;
         color: var(--footer-color);
@@ -82,16 +101,16 @@
         opacity: 0.85;
       }
 
-      /* --- Ajustes para celulares --- */
+      /* --- Móviles --- */
       @media (max-width: 600px) {
         body {
-          padding: 10px;
+          padding: 20px;
         }
 
         .logo {
-          margin-top: 20px;
           width: 80%;
           max-width: 320px;
+          margin-top: 10px;
         }
 
         .whatsapp {
@@ -105,7 +124,7 @@
         }
       }
 
-      /* --- Ajustes para pantallas grandes --- */
+      /* --- Escritorio grande --- */
       @media (min-width: 1200px) {
         .logo {
           max-width: 600px;
