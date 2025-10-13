@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>RASSAN Sistemas</title>
     <style>
-      /* --- Estilos generales --- */
+      /* --- Variables globales --- */
       :root {
         --bg-color: #000814;
         --text-color: #00e5ff;
-        --accent-color: #25D366;
+        --accent-color: #25d366;
         --accent-hover: #1ebe5d;
         --footer-color: #9ee7f8;
       }
@@ -32,25 +32,33 @@
         text-align: center;
       }
 
-      img.logo {
-        max-width: 280px;
-        width: 80%;
+      /* --- Imagen principal --- */
+      .logo {
+        width: clamp(180px, 40vw, 500px);
         height: auto;
-        margin-top: 20px;
+        margin-top: 40px;
         border-radius: 12px;
+        object-fit: contain;
+        transition: transform 0.3s ease, filter 0.3s ease;
       }
 
+      .logo:hover {
+        transform: scale(1.03);
+        filter: brightness(1.1);
+      }
+
+      /* --- Botón de WhatsApp --- */
       .whatsapp {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        margin-top: 30px;
+        margin-top: 40px;
         background-color: var(--accent-color);
         color: #fff;
         text-decoration: none;
         font-weight: 600;
-        font-size: clamp(1rem, 2.5vw, 1.2rem);
-        padding: 14px 24px;
+        font-size: clamp(1rem, 2vw, 1.3rem);
+        padding: 14px 28px;
         border-radius: 40px;
         transition: background-color 0.3s ease, transform 0.2s ease;
         box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3);
@@ -68,27 +76,48 @@
       }
 
       footer {
-        margin-top: 50px;
+        margin-top: 60px;
         color: var(--footer-color);
-        font-size: 0.9em;
-        opacity: 0.8;
+        font-size: clamp(0.8rem, 1.2vw, 1rem);
+        opacity: 0.85;
       }
 
-      /* --- Responsive: pantallas muy pequeñas --- */
-      @media (max-width: 480px) {
-        img.logo {
-          max-width: 200px;
-          margin-top: 10px;
+      /* --- Ajustes para celulares --- */
+      @media (max-width: 600px) {
+        body {
+          padding: 10px;
+        }
+
+        .logo {
+          margin-top: 20px;
+          width: 80%;
+          max-width: 320px;
         }
 
         .whatsapp {
           width: 100%;
-          max-width: 280px;
+          max-width: 300px;
+          padding: 12px 20px;
         }
 
         footer {
-          font-size: 0.8em;
-          margin-top: 30px;
+          margin-top: 40px;
+        }
+      }
+
+      /* --- Ajustes para pantallas grandes --- */
+      @media (min-width: 1200px) {
+        .logo {
+          max-width: 600px;
+        }
+
+        .whatsapp {
+          font-size: 1.4rem;
+          padding: 16px 36px;
+        }
+
+        footer {
+          font-size: 1rem;
         }
       }
     </style>
