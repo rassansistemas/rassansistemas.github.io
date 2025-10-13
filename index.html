@@ -1,11 +1,117 @@
 <!doctype html>
-<html>
+<html lang="es">
   <head>
     <meta charset="utf-8" />
-    <title>Mi página en GitHub Pages</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RASSAN Sistemas</title>
+    <style>
+      /* --- Estilos generales --- */
+      :root {
+        --bg-color: #000814;
+        --text-color: #00e5ff;
+        --accent-color: #25D366;
+        --accent-hover: #1ebe5d;
+        --footer-color: #9ee7f8;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        margin: 0;
+        padding: 20px;
+        text-align: center;
+      }
+
+      img.logo {
+        max-width: 280px;
+        width: 80%;
+        height: auto;
+        margin-top: 20px;
+        border-radius: 12px;
+      }
+
+      .whatsapp {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 30px;
+        background-color: var(--accent-color);
+        color: #fff;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: clamp(1rem, 2.5vw, 1.2rem);
+        padding: 14px 24px;
+        border-radius: 40px;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3);
+      }
+
+      .whatsapp:hover {
+        background-color: var(--accent-hover);
+        transform: translateY(-2px);
+      }
+
+      .whatsapp img {
+        width: 28px;
+        height: 28px;
+        margin-right: 10px;
+      }
+
+      footer {
+        margin-top: 50px;
+        color: var(--footer-color);
+        font-size: 0.9em;
+        opacity: 0.8;
+      }
+
+      /* --- Responsive: pantallas muy pequeñas --- */
+      @media (max-width: 480px) {
+        img.logo {
+          max-width: 200px;
+          margin-top: 10px;
+        }
+
+        .whatsapp {
+          width: 100%;
+          max-width: 280px;
+        }
+
+        footer {
+          font-size: 0.8em;
+          margin-top: 30px;
+        }
+      }
+    </style>
   </head>
+
   <body>
-    <h1>Hola desde GitHub Pages</h1>
-    <p>Esta es mi página publicada en username.github.io</p>
+    <img src="RASSAN.png" alt="RASSAN Sistemas" class="logo" />
+
+    <a
+      href="https://wa.me/3416641907"
+      class="whatsapp"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
+        alt="WhatsApp"
+      />
+      Contactar por WhatsApp
+    </a>
+
+    <footer>
+      <p>© 2025 RASSAN Sistemas — Carcarañá y alrededores</p>
+    </footer>
   </body>
 </html>
