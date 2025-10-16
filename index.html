@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>RASSAN Sistemas — Innovación y Tecnología</title>
 
+  <link rel="icon" type="image/png" href="favicon.png" />
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700&family=Inter:wght@400;600&display=swap" rel="stylesheet" />
 
   <style>
@@ -47,9 +48,9 @@
       animation: moveBg 18s ease infinite;
       z-index: -3;
     }
-    @keyframes moveBg { 
-      0%,100% { background-position:0 50% } 
-      50% { background-position:100% 50% } 
+    @keyframes moveBg {
+      0%,100% { background-position:0 50% }
+      50% { background-position:100% 50% }
     }
 
     body::after {
@@ -89,7 +90,6 @@
       box-shadow: 0 0 60px rgba(0, 229, 255, 0.15), inset 0 0 50px rgba(0, 229, 255, 0.08);
       padding: 60px 40px;
       width: min(90%, 850px);
-      animation: fadeUp 1.5s ease both;
       transform-style: preserve-3d;
       transform: translateY(60px) scale(0.9) rotateX(10deg);
       animation: appear3D 2s ease forwards;
@@ -102,31 +102,18 @@
       100% { opacity: 1; transform: none; }
     }
 
-    main::before {
-      content: "";
-      position: absolute;
-      width: 200%;
-      height: 200%;
-      top: -50%;
-      left: -50%;
-      background: conic-gradient(from 0deg, transparent 0%, rgba(0,229,255,0.1) 25%, transparent 50%);
-      animation: rotateHalo 12s linear infinite;
-      z-index: -1;
-    }
-    @keyframes rotateHalo {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-
     .logo {
       width: clamp(260px, 60vw, 520px);
       margin-bottom: 30px;
       filter: drop-shadow(0 0 30px rgba(0,229,255,0.6));
       transition: transform .6s ease, filter .6s ease;
     }
-    .logo:hover { transform: scale(1.08) rotateY(10deg); filter: drop-shadow(0 0 50px rgba(0,229,255,0.9)); }
 
-    /* === TÍTULO CON EFECTO DE PARPADEO === */
+    .logo:hover {
+      transform: scale(1.08) rotateY(10deg);
+      filter: drop-shadow(0 0 50px rgba(0,229,255,0.9));
+    }
+
     h1 {
       font-family: "Orbitron", sans-serif;
       color: var(--glow);
@@ -143,8 +130,8 @@
     }
 
     @keyframes blink {
-      0%, 90%, 100% { opacity: 1; text-shadow: 0 0 25px rgba(0,229,255,0.7), 0 0 50px rgba(0,229,255,0.3); }
-      92%, 96% { opacity: 0.4; text-shadow: 0 0 5px rgba(0,229,255,0.2); }
+      0%, 90%, 100% { opacity: 1; }
+      92%, 96% { opacity: 0.4; }
     }
 
     .subtitle {
@@ -161,39 +148,11 @@
       line-height: 1.7;
       color: #c9ecff;
     }
-    .highlight { color: var(--glow); font-weight: 600; }
 
-    .buttons {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 15px;
-    }
-    @media (min-width: 768px) {
-      .buttons { flex-direction: row; justify-content: center; gap: 25px; }
-    }
-
-    .whatsapp {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      background: linear-gradient(90deg, var(--accent), #32e47b);
-      color: white;
-      text-decoration: none;
+    .highlight {
+      color: var(--glow);
       font-weight: 600;
-      font-size: clamp(1rem, 1.4vw, 1.2rem);
-      padding: 14px 30px;
-      border-radius: 50px;
-      transition: all .3s ease;
-      box-shadow: 0 0 20px rgba(37,211,102,0.5);
     }
-    .whatsapp:hover {
-      background: linear-gradient(90deg, var(--accent-hover), #3cff8a);
-      transform: translateY(-4px) scale(1.05);
-      box-shadow: 0 0 35px rgba(37,211,102,0.8);
-    }
-    .whatsapp img { width: 26px; height: 26px; filter: drop-shadow(0 0 5px rgba(0,0,0,0.3)); }
 
     footer {
       margin-top: 60px;
@@ -202,33 +161,57 @@
       text-shadow: 0 0 6px rgba(0,229,255,0.2);
     }
 
-    /* Control de sonido */
-    #soundControl {
+    /* Botón flotante WhatsApp con efecto “respiración” */
+    .whatsapp-float {
       position: fixed;
-      top: 20px;
+      bottom: 25px;
       right: 25px;
-      background: var(--glass);
-      border: 1px solid var(--border);
+      background: linear-gradient(135deg, #25d366, #32e47b);
+      color: white;
+      width: 60px;
+      height: 60px;
       border-radius: 50%;
-      width: 48px;
-      height: 48px;
       display: flex;
-      align-items: center;
       justify-content: center;
-      cursor: pointer;
-      box-shadow: 0 0 10px rgba(0,229,255,0.3);
-      transition: all .3s ease;
-      backdrop-filter: blur(10px);
-      z-index: 10;
+      align-items: center;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+      z-index: 100;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      animation: pulse 2s infinite;
     }
-    #soundControl:hover { box-shadow: 0 0 25px rgba(0,229,255,0.6); transform: scale(1.1); }
+
+    .whatsapp-float:hover {
+      transform: scale(1.15);
+      box-shadow: 0 0 35px rgba(0,211,102,0.8);
+    }
+
+    .whatsapp-float img {
+      width: 32px;
+      height: 32px;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+    @media (max-width: 768px) {
+      .whatsapp-float {
+        width: 50px;
+        height: 50px;
+        bottom: 20px;
+        right: 20px;
+      }
+      .whatsapp-float img {
+        width: 28px;
+        height: 28px;
+      }
+    }
   </style>
 </head>
 
 <body>
   <canvas id="particles"></canvas>
-
-  <div id="soundControl" title="Activar / Desactivar sonido">🔊</div>
 
   <main id="main">
     <img src="RASSAN.png" alt="RASSAN Sistemas" class="logo" />
@@ -236,35 +219,26 @@
     <p class="subtitle" id="typing"></p>
 
     <p class="description">
-      En <span class="highlight">RASSAN Sistemas</span> potenciamos tu negocio con soluciones tecnológicas
-      confiables y personalizadas. Ofrecemos <span class="highlight">seguridad, redes y soporte integral</span> 
-      para empresas y hogares en <span class="highlight">Carcarañá y alrededores</span>.<br><br>
-      📞 <b>Contactanos hoy</b> y descubrí cómo optimizar tu sistema.
+      En <span class="highlight">RASSAN Sistemas</span> potenciamos tu negocio con soluciones tecnológicas confiables y personalizadas.
+      Brindamos <span class="highlight">seguridad, redes y soporte integral</span> para empresas y hogares en <span class="highlight">Carcarañá y alrededores</span>.<br><br>
+      📞 <b>Contactanos hoy</b> y descubre cómo podemos optimizar tu sistema para hacerlo más eficiente y seguro.
     </p>
-
-    <div class="buttons">
-      <a href="https://wa.me/3416641907" class="whatsapp" target="_blank">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"> Contactar a Edgardo
-      </a>
-      <a href="https://wa.me/3413573844" class="whatsapp" target="_blank">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"> Contactar a Agustín
-      </a>
-    </div>
 
     <footer>© 2025 RASSAN Sistemas — Innovación, seguridad y tecnología</footer>
   </main>
 
-  <audio id="bgSound" loop>
-    <source src="https://cdn.pixabay.com/download/audio/2021/09/27/audio_4e5e34f418.mp3?filename=ambient-futuristic-soundscape-10207.mp3" type="audio/mpeg">
-  </audio>
+  <!-- Botón flotante WhatsApp -->
+  <a href="https://wa.me/3416641907" class="whatsapp-float" target="_blank" title="Contactar por WhatsApp">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+  </a>
 
   <script>
-    // === Partículas ===
+    // Partículas animadas
     const c = document.getElementById('particles'), x = c.getContext('2d');
     let p = [];
     const resize = () => (c.width = innerWidth, c.height = innerHeight);
     addEventListener('resize', resize); resize();
-    for (let i=0;i<100;i++) 
+    for (let i=0;i<100;i++)
       p.push({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*2+0.5,dx:(Math.random()-.5)*.5,dy:(Math.random()-.5)*.5,a:Math.random()*.5+.3});
     (function anim(){
       x.clearRect(0,0,c.width,c.height);
@@ -280,26 +254,16 @@
       requestAnimationFrame(anim);
     })();
 
-    // === Efecto typing ===
+    // Efecto typing
     const t = "Tecnología que impulsa tu crecimiento 💡", el = document.getElementById("typing");
     let i=0; (function type(){ if(i<t.length){ el.textContent += t[i++]; setTimeout(type,60);} })();
 
-    // === Parallax 3D ===
+    // Parallax 3D
     const main = document.getElementById('main');
     document.addEventListener('mousemove', e => {
       const xAxis = (window.innerWidth / 2 - e.pageX) / 50;
       const yAxis = (window.innerHeight / 2 - e.pageY) / 50;
       main.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
-    });
-
-    // === Sonido ambiental ===
-    const sound = document.getElementById('bgSound');
-    const btn = document.getElementById('soundControl');
-    let playing = false;
-    btn.addEventListener('click', () => {
-      if(!playing) { sound.play(); btn.textContent = '🔈'; }
-      else { sound.pause(); btn.textContent = '🔊'; }
-      playing = !playing;
     });
   </script>
 </body>
