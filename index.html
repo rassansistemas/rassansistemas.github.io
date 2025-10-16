@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>RASSAN Sistemas — Innovación y Tecnología</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700&family=Inter:wght@400;600&display=swap" rel="stylesheet" />
 
   <style>
     :root {
@@ -17,7 +17,7 @@
       --accent-hover: #1ebe5d;
       --text: #e9f8ff;
       --glass: rgba(0, 20, 40, 0.55);
-      --border: rgba(0, 229, 255, 0.2);
+      --border: rgba(0, 229, 255, 0.25);
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -30,23 +30,47 @@
       flex-direction: column;
       font-family: "Inter", sans-serif;
       color: var(--text);
-      background: radial-gradient(circle at center, var(--bg3), var(--bg1));
+      background: radial-gradient(circle at 20% 20%, var(--bg3), var(--bg1));
       overflow: hidden;
       text-align: center;
       padding: 20px;
       position: relative;
     }
 
+    /* Fondo animado */
     body::before {
       content: "";
       position: fixed;
       inset: 0;
       background: linear-gradient(-45deg, var(--bg1), var(--bg2), var(--bg3), var(--bg2));
       background-size: 400% 400%;
-      animation: moveBg 15s ease infinite;
+      animation: moveBg 18s ease infinite;
+      z-index: -3;
+    }
+    @keyframes moveBg { 
+      0%,100%{background-position:0 50%} 
+      50%{background-position:100% 50%} 
+    }
+
+    /* Capa de líneas energéticas */
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(
+        120deg,
+        rgba(0,229,255,0.03) 0,
+        rgba(0,229,255,0.03) 1px,
+        transparent 1px,
+        transparent 100px
+      );
+      animation: moveLines 20s linear infinite;
       z-index: -2;
     }
-    @keyframes moveBg { 0%,100%{background-position:0 50%} 50%{background-position:100% 50%} }
+    @keyframes moveLines {
+      from { background-position: 0 0; }
+      to { background-position: 1000px 1000px; }
+    }
 
     canvas#particles {
       position: fixed;
@@ -54,46 +78,77 @@
       width: 100%; height: 100%;
       pointer-events: none;
       z-index: -1;
+      opacity: 0.7;
     }
 
     main {
       background: var(--glass);
       border: 1px solid var(--border);
-      border-radius: 20px;
-      backdrop-filter: blur(14px);
-      box-shadow: 0 0 40px rgba(0, 229, 255, 0.08);
-      padding: 50px 30px;
-      width: min(90%, 800px);
-      animation: fadeUp 1s ease both;
+      border-radius: 22px;
+      backdrop-filter: blur(18px) saturate(160%);
+      box-shadow: 0 0 50px rgba(0, 229, 255, 0.1), inset 0 0 40px rgba(0, 229, 255, 0.08);
+      padding: 60px 40px;
+      width: min(90%, 820px);
+      animation: fadeUp 1.2s ease both;
+      position: relative;
+      overflow: hidden;
     }
-    @keyframes fadeUp { from {opacity:0; transform:translateY(40px);} to {opacity:1; transform:none;} }
+    @keyframes fadeUp { 
+      from {opacity:0; transform:translateY(50px) scale(0.98);} 
+      to {opacity:1; transform:none;} 
+    }
+
+    /* Halo dinámico detrás del main */
+    main::before {
+      content: "";
+      position: absolute;
+      width: 200%;
+      height: 200%;
+      top: -50%;
+      left: -50%;
+      background: conic-gradient(from 0deg, transparent 0%, rgba(0,229,255,0.15) 20%, transparent 40%);
+      animation: rotateHalo 10s linear infinite;
+      z-index: -1;
+    }
+    @keyframes rotateHalo {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
 
     .logo {
-      width: clamp(260px, 65vw, 520px);
+      width: clamp(260px, 60vw, 500px);
       margin-bottom: 30px;
-      filter: drop-shadow(0 0 20px rgba(0,229,255,0.5));
-      transition: transform .3s ease, filter .3s ease;
+      filter: drop-shadow(0 0 30px rgba(0,229,255,0.6));
+      transition: transform .4s ease, filter .4s ease;
     }
-    .logo:hover { transform: scale(1.05); filter: drop-shadow(0 0 30px rgba(0,229,255,0.8)); }
+    .logo:hover { transform: scale(1.08); filter: drop-shadow(0 0 50px rgba(0,229,255,0.9)); }
 
     h1 {
       font-family: "Orbitron", sans-serif;
       color: var(--glow);
-      font-size: clamp(1.8rem, 3vw, 2.6rem);
-      text-shadow: 0 0 15px rgba(0,229,255,.4);
-      margin-bottom: 10px;
+      font-size: clamp(2rem, 3.2vw, 2.8rem);
+      text-shadow: 0 0 20px rgba(0,229,255,0.5), 0 0 40px rgba(0,229,255,0.2);
+      margin-bottom: 12px;
+      letter-spacing: 1px;
+      animation: flicker 3s infinite;
+    }
+    @keyframes flicker {
+      0%, 18%, 22%, 25%, 53%, 57%, 100% { opacity: 1; }
+      20%, 24%, 55% { opacity: 0.6; }
     }
 
     .subtitle {
-      font-size: clamp(1rem, 1.6vw, 1.1rem);
+      font-size: clamp(1.1rem, 1.6vw, 1.2rem);
       margin-bottom: 25px;
+      color: #aee6ff;
+      text-shadow: 0 0 10px rgba(0,229,255,0.4);
     }
 
     .description {
       max-width: 650px;
-      margin: 0 auto 40px;
+      margin: 0 auto 45px;
       font-size: 1rem;
-      line-height: 1.6;
+      line-height: 1.7;
       color: #c9ecff;
     }
     .highlight { color: var(--glow); font-weight: 600; }
@@ -113,27 +168,28 @@
       align-items: center;
       justify-content: center;
       gap: 10px;
-      background: var(--accent);
+      background: linear-gradient(90deg, var(--accent), #32e47b);
       color: white;
       text-decoration: none;
       font-weight: 600;
-      font-size: clamp(1rem, 1.5vw, 1.2rem);
-      padding: 14px 28px;
+      font-size: clamp(1rem, 1.4vw, 1.2rem);
+      padding: 14px 30px;
       border-radius: 50px;
       transition: all .3s ease;
-      box-shadow: 0 0 15px rgba(37,211,102,0.4);
+      box-shadow: 0 0 20px rgba(37,211,102,0.5);
     }
     .whatsapp:hover {
-      background: var(--accent-hover);
-      transform: translateY(-4px);
-      box-shadow: 0 0 25px rgba(37,211,102,0.6);
+      background: linear-gradient(90deg, var(--accent-hover), #3cff8a);
+      transform: translateY(-4px) scale(1.05);
+      box-shadow: 0 0 30px rgba(37,211,102,0.7);
     }
-    .whatsapp img { width: 26px; height: 26px; }
+    .whatsapp img { width: 26px; height: 26px; filter: drop-shadow(0 0 5px rgba(0,0,0,0.3)); }
 
     footer {
-      margin-top: 50px;
+      margin-top: 60px;
       font-size: .9rem;
-      color: #c9ecff;
+      color: #aee6ff;
+      text-shadow: 0 0 6px rgba(0,229,255,0.2);
     }
   </style>
 </head>
@@ -166,15 +222,33 @@
   </main>
 
   <script>
+    // Partículas animadas
     const c = document.getElementById('particles'), x = c.getContext('2d');
     let p = [];
     const resize = () => (c.width = innerWidth, c.height = innerHeight);
     addEventListener('resize', resize); resize();
-    for (let i=0;i<70;i++) p.push({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*2+0.5,dx:(Math.random()-.5)*.6,dy:(Math.random()-.5)*.6,a:Math.random()*.5+.3});
-    (function anim(){x.clearRect(0,0,c.width,c.height);p.forEach(o=>{x.beginPath();x.arc(o.x,o.y,o.r,0,6.28);x.fillStyle=`rgba(0,229,255,${o.a})`;x.fill();o.x+=o.dx;o.y+=o.dy;if(o.x<0||o.x>c.width)o.dx*=-1;if(o.y<0||o.y>c.height)o.dy*=-1});requestAnimationFrame(anim)})();
+    for (let i=0;i<90;i++) 
+      p.push({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*2+0.5,dx:(Math.random()-.5)*.4,dy:(Math.random()-.5)*.4,a:Math.random()*.5+.3});
+    (function anim(){
+      x.clearRect(0,0,c.width,c.height);
+      p.forEach(o=>{
+        x.beginPath();
+        x.arc(o.x,o.y,o.r,0,6.28);
+        x.fillStyle=`rgba(0,229,255,${o.a})`;
+        x.fill();
+        o.x+=o.dx; o.y+=o.dy;
+        if(o.x<0||o.x>c.width)o.dx*=-1;
+        if(o.y<0||o.y>c.height)o.dy*=-1;
+      });
+      requestAnimationFrame(anim);
+    })();
 
-    const t = "Tecnología que impulsa tu crecimiento", el = document.getElementById("typing");
-    let i=0; (function type(){ if(i<t.length){ el.textContent += t[i++]; setTimeout(type,50);} })();
+    // Efecto typing
+    const t = "Tecnología que impulsa tu crecimiento 💡", el = document.getElementById("typing");
+    let i=0; 
+    (function type(){ 
+      if(i<t.length){ el.textContent += t[i++]; setTimeout(type,60);} 
+    })();
   </script>
 </body>
 </html>
