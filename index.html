@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>RASSAN Sistemas — Innovación y Tecnología</title>
 
-  <link rel="icon" type="image/png" href="favicon.png" />
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700&family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" href="favicon.png" />
 
   <style>
     :root {
@@ -14,71 +14,35 @@
       --bg2: #001d3d;
       --bg3: #003566;
       --glow: #00e5ff;
-      --accent: #25d366;
-      --accent-hover: #1ebe5d;
       --text: #e9f8ff;
-      --glass: rgba(0, 20, 40, 0.55);
-      --border: rgba(0, 229, 255, 0.25);
+      --accent: #00ffd5;
+      --glass: rgba(0, 25, 50, 0.55);
+      --border: rgba(0, 229, 255, 0.3);
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
+      font-family: "Inter", sans-serif;
+      color: var(--text);
+      background: radial-gradient(circle at 20% 20%, var(--bg3), var(--bg1));
+      overflow-x: hidden;
+      text-align: center;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
-      font-family: "Inter", sans-serif;
-      color: var(--text);
-      background: radial-gradient(circle at 20% 20%, var(--bg3), var(--bg1));
-      overflow-x: hidden; /* Permite scroll vertical en móviles */
-      text-align: center;
+      justify-content: center;
       padding: 20px;
       position: relative;
       perspective: 1000px;
     }
 
-    body::before {
-      content: "";
+    #network {
       position: fixed;
-      inset: 0;
-      background: linear-gradient(-45deg, var(--bg1), var(--bg2), var(--bg3), var(--bg2));
-      background-size: 400% 400%;
-      animation: moveBg 18s ease infinite;
-      z-index: -3;
-    }
-    @keyframes moveBg {
-      0%,100% { background-position:0 50% }
-      50% { background-position:100% 50% }
-    }
-
-    body::after {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background: repeating-linear-gradient(
-        120deg,
-        rgba(0,229,255,0.03) 0,
-        rgba(0,229,255,0.03) 1px,
-        transparent 1px,
-        transparent 100px
-      );
-      animation: moveLines 25s linear infinite;
-      z-index: -2;
-    }
-    @keyframes moveLines {
-      from { background-position: 0 0; }
-      to { background-position: 1000px 1000px; }
-    }
-
-    canvas#particles {
-      position: fixed;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: -1;
-      opacity: 0.8;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: -5;
     }
 
     main {
@@ -88,192 +52,315 @@
       backdrop-filter: blur(20px) saturate(160%);
       box-shadow: 0 0 60px rgba(0, 229, 255, 0.15), inset 0 0 50px rgba(0, 229, 255, 0.08);
       padding: 60px 40px;
-      width: min(90%, 850px);
-      transform-style: preserve-3d;
-      transform: translateY(60px) scale(0.9) rotateX(10deg);
-      animation: appear3D 2s ease forwards;
-      position: relative;
-      overflow: hidden;
-      margin: 40px 0;
+      width: min(90%, 900px);
+      margin: 0 auto;
+      transition: transform 0.5s ease;
+      opacity: 0;
+      transform: translateY(40px);
+      animation: fadeInUp 1.5s ease forwards;
     }
 
-    @keyframes appear3D {
-      0% { opacity: 0; transform: translateY(100px) scale(0.8) rotateX(20deg); }
-      100% { opacity: 1; transform: none; }
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(60px); }
+      100% { opacity: 1; transform: translateY(0); }
     }
 
     .logo {
       width: 80%;
-      max-width: 400px;
-      height: auto;
-      margin-bottom: 30px;
-      filter: drop-shadow(0 0 30px rgba(0,229,255,0.6));
-      transition: transform .6s ease, filter .6s ease;
+      max-width: 500px;
+      animation: floatLogo 6s ease-in-out infinite, glow 3s ease-in-out infinite alternate, fadeIn 2s ease forwards;
+      filter: drop-shadow(0 0 25px rgba(0,229,255,0.6));
+      transform: perspective(800px) rotateY(0deg);
+      transition: transform 0.3s ease;
     }
 
     .logo:hover {
-      transform: scale(1.08) rotateY(10deg);
-      filter: drop-shadow(0 0 50px rgba(0,229,255,0.9));
+      transform: perspective(800px) rotateY(15deg) scale(1.05);
+      filter: drop-shadow(0 0 35px rgba(0,255,255,0.9));
+    }
+
+    @keyframes floatLogo {
+      0%,100% { transform: translateY(0) perspective(800px) rotateY(0deg); }
+      50% { transform: translateY(-12px) perspective(800px) rotateY(6deg); }
+    }
+
+    @keyframes glow {
+      0% { filter: drop-shadow(0 0 15px rgba(0,229,255,0.4)); }
+      100% { filter: drop-shadow(0 0 40px rgba(0,255,255,0.9)); }
     }
 
     h1 {
       font-family: "Orbitron", sans-serif;
       color: var(--glow);
-      font-size: clamp(2.1rem, 3.5vw, 3rem);
+      font-size: clamp(2.2rem, 3.5vw, 3rem);
       text-shadow: 0 0 25px rgba(0,229,255,0.7), 0 0 50px rgba(0,229,255,0.3);
-      margin-bottom: 12px;
-      letter-spacing: 1px;
-      animation: hologlow 4s ease-in-out infinite, blink 2.5s ease-in-out infinite;
-    }
-
-    @keyframes hologlow {
-      0%,100% { filter: hue-rotate(0deg) brightness(1); }
-      50% { filter: hue-rotate(45deg) brightness(1.3); }
+      margin-top: 20px;
+      margin-bottom: 10px;
+      opacity: 0;
+      animation: fadeInUp 1.5s ease forwards, blink 2s infinite alternate;
+      animation-delay: 0.5s;
     }
 
     @keyframes blink {
-      0%, 90%, 100% { opacity: 1; }
-      92%, 96% { opacity: 0.4; }
+      0%, 100% { opacity: 1; text-shadow: 0 0 25px rgba(0,229,255,0.7); }
+      50% { opacity: 0.6; text-shadow: 0 0 10px rgba(0,229,255,0.3); }
     }
 
     .subtitle {
-      font-size: clamp(1.1rem, 1.8vw, 1.2rem);
-      margin-bottom: 25px;
+      font-size: 1.2rem;
       color: #aee6ff;
-      text-shadow: 0 0 10px rgba(0,229,255,0.4);
+      margin-bottom: 25px;
+      opacity: 0;
+      animation: fadeInUp 1.5s ease forwards;
+      animation-delay: 1s;
     }
 
     .description {
-      max-width: 650px;
-      margin: 0 auto 45px;
       font-size: 1rem;
       line-height: 1.7;
       color: #c9ecff;
+      max-width: 650px;
+      margin: 0 auto 45px;
+      opacity: 0;
+      animation: fadeInUp 1.5s ease forwards;
+      animation-delay: 1.5s;
     }
 
     .highlight {
-      color: var(--glow);
+      color: var(--accent);
       font-weight: 600;
+      text-shadow: 0 0 10px rgba(0,255,255,0.5);
     }
 
     footer {
       margin-top: 60px;
-      font-size: .9rem;
+      font-size: 0.9rem;
       color: #aee6ff;
       text-shadow: 0 0 6px rgba(0,229,255,0.2);
+      opacity: 0;
+      animation: fadeInUp 1.5s ease forwards;
+      animation-delay: 2.5s;
     }
 
-    /* Botón flotante WhatsApp */
-    .whatsapp-float {
+    .cta {
+      background: linear-gradient(90deg, #00cfff, #00ffa6);
+      color: #001d3d;
+      padding: 14px 28px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 700;
+      display: inline-block;
+      margin-top: 25px;
+      box-shadow: 0 0 25px rgba(0,255,255,0.5);
+      transition: all 0.3s ease;
+      animation: pulse 2.5s infinite, fadeInUp 1.5s ease forwards;
+      animation-delay: 2s;
+      opacity: 0;
+    }
+
+    .cta:hover {
+      transform: scale(1.08);
+      background: linear-gradient(90deg, #00ffa6, #00cfff);
+      box-shadow: 0 0 45px rgba(0,255,255,0.8);
+    }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 20px rgba(0,255,255,0.3); }
+      50% { box-shadow: 0 0 40px rgba(0,255,255,0.8); }
+    }
+
+    /* WhatsApp flotante con glow */
+    .whatsapp-container {
       position: fixed;
       bottom: 15px;
       right: 15px;
-      background: linear-gradient(135deg, #25d366, #32e47b);
-      color: white;
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
       display: flex;
-      justify-content: center;
-      align-items: center;
-      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+      flex-direction: column;
+      gap: 12px;
       z-index: 100;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      animation: pulse 2s infinite;
+      align-items: flex-end;
+    }
+
+    .whatsapp-float {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 16px;
+      border-radius: 50px;
+      color: white;
+      font-weight: 600;
+      font-size: 0.9rem;
+      backdrop-filter: blur(8px);
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.15);
+      transition: all 0.3s ease;
+      box-shadow: 0 0 20px rgba(0, 229, 255, 0.2);
+      position: relative;
+      animation: glowButton 2s infinite alternate;
+    }
+
+    @keyframes glowButton {
+      0% { box-shadow: 0 0 15px rgba(0,255,255,0.5); }
+      50% { box-shadow: 0 0 35px rgba(0,255,255,0.8); }
+      100% { box-shadow: 0 0 15px rgba(0,255,255,0.5); }
     }
 
     .whatsapp-float:hover {
-      transform: scale(1.15);
-      box-shadow: 0 0 35px rgba(0,211,102,0.8);
+      transform: scale(1.08);
+      box-shadow: 0 0 50px rgba(0,229,255,1);
+    }
+
+    /* Tooltip estilo burbuja */
+    .whatsapp-float .tooltip {
+      position: absolute;
+      right: 110%;
+      background: rgba(0,0,0,0.85);
+      color: #00ffd5;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      white-space: nowrap;
+      opacity: 0;
+      transform: translateX(10px);
+      transition: all 0.3s ease;
+      pointer-events: none;
+      text-align: left;
+    }
+
+    .whatsapp-float:hover .tooltip {
+      opacity: 1;
+      transform: translateX(0);
     }
 
     .whatsapp-float img {
       width: 28px;
       height: 28px;
+      filter: drop-shadow(0 0 10px rgba(255,255,255,0.6));
     }
 
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.1); }
+    .whatsapp-float span {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      line-height: 1.1;
     }
 
+    .whatsapp-float small {
+      font-size: 0.7rem;
+      opacity: 0.9;
+      font-weight: 400;
+    }
+
+    .edgardo {
+      background: linear-gradient(135deg, #25d366, #00ff9d);
+      box-shadow: 0 0 25px rgba(0,255,160,0.5);
+    }
+
+    .agustin {
+      background: linear-gradient(135deg, #007bff, #00bfff);
+      box-shadow: 0 0 25px rgba(0,200,255,0.5);
+    }
+
+    /* Responsivo */
     @media (max-width: 768px) {
       main {
-        padding: 40px 20px;
+        padding: 40px 25px;
+        margin-top: 50px;
       }
-      .logo {
-        width: 70%;
-      }
-      .whatsapp-float {
-        width: 45px;
-        height: 45px;
+      .logo { max-width: 320px; }
+      .whatsapp-container {
         bottom: 10px;
-        right: 10px;
+        right: 50%;
+        transform: translateX(50%);
+        flex-direction: row;
+        gap: 10px;
       }
-      .whatsapp-float img {
-        width: 24px;
-        height: 24px;
-      }
+      .whatsapp-float { padding: 8px 12px; font-size: 0.8rem; }
+      .whatsapp-float img { width: 24px; height: 24px; }
+      .whatsapp-float .tooltip { right: auto; top: -35px; left: 50%; transform: translateX(-50%); }
     }
-
   </style>
 </head>
 
 <body>
-  <canvas id="particles"></canvas>
+  <canvas id="network"></canvas>
 
-  <main id="main">
-    <img src="RASSAN.png" alt="RASSAN Sistemas" class="logo" />
+  <main>
+    <img src="RASSAN.png" alt="RASSAN Sistemas" class="logo">
     <h1>RASSAN Sistemas</h1>
     <p class="subtitle" id="typing"></p>
 
     <p class="description">
-      En <span class="highlight">RASSAN Sistemas</span> potenciamos tu negocio con soluciones tecnológicas confiables y personalizadas.
-      Brindamos <span class="highlight">seguridad, redes y soporte integral</span> para empresas y hogares en <span class="highlight">Carcarañá y alrededores</span>.<br><br>
-      📞 <b>Contactanos hoy</b> y descubre cómo podemos optimizar tu sistema para hacerlo más eficiente y seguro.
+      En <span class="highlight">RASSAN Sistemas</span> combinamos innovación, seguridad y rendimiento.<br><br>
+      💡 Instalamos <b>cámaras, alarmas, redes, IPTV, internet satelital</b> y más.<br>
+      ⚙️ Atendemos con rapidez, compromiso y tecnología avanzada.<br><br>
+      <a href="https://wa.me/3416641907" target="_blank" class="cta">💬 Consultá ahora — ¡Respondemos al instante!</a>
     </p>
 
-    <footer>© 2025 RASSAN Sistemas — Innovación, seguridad y tecnología</footer>
+    <footer>© 2025 RASSAN Sistemas — Innovación, Seguridad y Tecnología</footer>
   </main>
 
-  <!-- Botón flotante WhatsApp -->
-  <a href="https://wa.me/3416641907" class="whatsapp-float" target="_blank" title="Contactar por WhatsApp">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
-  </a>
+  <div class="whatsapp-container">
+    <a href="https://wa.me/3416641907" class="whatsapp-float edgardo" target="_blank">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp Edgardo">
+      <span>Edgardo<br><small>Instalador</small></span>
+      <div class="tooltip">¡Chateá con Edgardo ahora!</div>
+    </a>
+
+    <a href="https://wa.me/3415123456" class="whatsapp-float agustin" target="_blank">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp Agustin">
+      <span>Agustín<br><small>Técnico</small></span>
+      <div class="tooltip">¡Consultá con Agustín en segundos!</div>
+    </a>
+  </div>
 
   <script>
-    // Partículas animadas
-    const c = document.getElementById('particles'), x = c.getContext('2d');
-    let p = [];
-    const resize = () => (c.width = innerWidth, c.height = innerHeight);
-    addEventListener('resize', resize); resize();
-    for (let i=0;i<100;i++)
-      p.push({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*2+0.5,dx:(Math.random()-.5)*.5,dy:(Math.random()-.5)*.5,a:Math.random()*.5+.3});
-    (function anim(){
-      x.clearRect(0,0,c.width,c.height);
-      p.forEach(o=>{
-        x.beginPath();
-        x.arc(o.x,o.y,o.r,0,6.28);
-        x.fillStyle=`rgba(0,229,255,${o.a})`;
-        x.fill();
-        o.x+=o.dx; o.y+=o.dy;
-        if(o.x<0||o.x>c.width)o.dx*=-1;
-        if(o.y<0||o.y>c.height)o.dy*=-1;
+    // Efecto de escritura
+    const texto = "Soluciones seguras, rápidas y a medida para vos 🔧📡";
+    const el = document.getElementById("typing");
+    let i = 0;
+    (function type(){ if(i < texto.length){ el.textContent += texto[i++]; setTimeout(type,50); } })();
+
+    // Fondo tipo red digital con puntos y líneas
+    const canvas = document.getElementById("network");
+    const ctx = canvas.getContext("2d");
+    let nodes = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      nodes = Array.from({length: 120}, () => ({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: Math.random() * 1.3 + 0.5,
+        dx: (Math.random() - 0.5) * 0.4,
+        dy: (Math.random() - 0.5) * 0.4
+      }));
+    }
+
+    function drawNetwork() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "rgba(255,255,255,0.8)";
+      nodes.forEach(a => {
+        a.x += a.dx; a.y += a.dy;
+        if(a.x < 0 || a.x > canvas.width) a.dx *= -1;
+        if(a.y < 0 || a.y > canvas.height) a.dy *= -1;
+        ctx.beginPath(); ctx.arc(a.x,a.y,a.r,0,Math.PI*2); ctx.fill();
+        nodes.forEach(b => {
+          const dist = Math.hypot(a.x-b.x, a.y-b.y);
+          if(dist<120){
+            ctx.strokeStyle = `rgba(0,229,255,${1-dist/120})`;
+            ctx.lineWidth = 0.5;
+            ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke();
+          }
+        });
       });
-      requestAnimationFrame(anim);
-    })();
+      requestAnimationFrame(drawNetwork);
+    }
 
-    // Efecto typing
-    const t = "Tecnología que impulsa tu crecimiento . . . 💡", el = document.getElementById("typing");
-    let i=0; (function type(){ if(i<t.length){ el.textContent += t[i++]; setTimeout(type,60);} })();
-
-    // Parallax 3D
-    const main = document.getElementById('main');
-    document.addEventListener('mousemove', e => {
-      const xAxis = (window.innerWidth / 2 - e.pageX) / 50;
-      const yAxis = (window.innerHeight / 2 - e.pageY) / 50;
-      main.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
-    });
+    window.addEventListener("resize", resizeCanvas);
+    resizeCanvas();
+    drawNetwork();
   </script>
 </body>
 </html>
