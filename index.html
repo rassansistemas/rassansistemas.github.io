@@ -1,279 +1,180 @@
 <!doctype html>
 <html lang="es">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>RASSAN Sistemas — Innovación y Tecnología</title>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RASSAN Sistemas — Innovación y Tecnología</title>
 
-    <!-- Fuentes modernas -->
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Inter:wght@400;600&display=swap" rel="stylesheet" />
 
-    <style>
-      :root {
-        --bg1: #000814;
-        --bg2: #001d3d;
-        --bg3: #003566;
-        --glow: #00e5ff;
-        --accent: #25d366;
-        --accent-hover: #1ebe5d;
-        --text: #e9f8ff;
-        --glass-bg: rgba(0, 20, 40, 0.55);
-        --border: rgba(0, 229, 255, 0.2);
-      }
+  <style>
+    :root {
+      --bg1: #000814;
+      --bg2: #001d3d;
+      --bg3: #003566;
+      --glow: #00e5ff;
+      --accent: #25d366;
+      --accent-hover: #1ebe5d;
+      --text: #e9f8ff;
+      --glass: rgba(0, 20, 40, 0.55);
+      --border: rgba(0, 229, 255, 0.2);
+    }
 
-      * { box-sizing: border-box; margin: 0; padding: 0; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
-      body {
-        font-family: 'Inter', sans-serif;
-        color: var(--text);
-        background: radial-gradient(circle at center, var(--bg3), var(--bg1));
-        overflow: hidden;
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        position: relative;
-        padding: 20px;
-      }
+    body {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      font-family: "Inter", sans-serif;
+      color: var(--text);
+      background: radial-gradient(circle at center, var(--bg3), var(--bg1));
+      overflow: hidden;
+      text-align: center;
+      padding: 20px;
+      position: relative;
+    }
 
-      body::before {
-        content: "";
-        position: fixed;
-        top: 0; left: 0;
-        width: 200%; height: 200%;
-        background: linear-gradient(-45deg, var(--bg1), var(--bg2), var(--bg3), var(--bg2));
-        background-size: 400% 400%;
-        animation: gradientShift 15s ease infinite;
-        z-index: -2;
-      }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(-45deg, var(--bg1), var(--bg2), var(--bg3), var(--bg2));
+      background-size: 400% 400%;
+      animation: moveBg 15s ease infinite;
+      z-index: -2;
+    }
+    @keyframes moveBg { 0%,100%{background-position:0 50%} 50%{background-position:100% 50%} }
 
-      @keyframes gradientShift {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
-      }
+    canvas#particles {
+      position: fixed;
+      inset: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
 
-      canvas#particles {
-        position: fixed;
-        top: 0; left: 0;
-        width: 100%; height: 100%;
-        z-index: -1;
-        pointer-events: none;
-      }
+    main {
+      background: var(--glass);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      backdrop-filter: blur(14px);
+      box-shadow: 0 0 40px rgba(0, 229, 255, 0.08);
+      padding: 50px 30px;
+      width: min(90%, 800px);
+      animation: fadeUp 1s ease both;
+    }
+    @keyframes fadeUp { from {opacity:0; transform:translateY(40px);} to {opacity:1; transform:none;} }
 
-      main {
-        position: relative;
-        z-index: 1;
-        background: var(--glass-bg);
-        border: 1px solid var(--border);
-        border-radius: 20px;
-        padding: 60px 30px;
-        width: 90%;
-        max-width: 900px;
-        backdrop-filter: blur(14px);
-        box-shadow: 0 0 50px rgba(0, 229, 255, 0.08);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        animation: fadeInUp 1.4s ease both;
-      }
+    .logo {
+      width: clamp(260px, 65vw, 520px);
+      margin-bottom: 30px;
+      filter: drop-shadow(0 0 20px rgba(0,229,255,0.5));
+      transition: transform .3s ease, filter .3s ease;
+    }
+    .logo:hover { transform: scale(1.05); filter: drop-shadow(0 0 30px rgba(0,229,255,0.8)); }
 
-      @keyframes fadeInUp {
-        0% { opacity: 0; transform: translateY(40px); }
-        100% { opacity: 1; transform: translateY(0); }
-      }
+    h1 {
+      font-family: "Orbitron", sans-serif;
+      color: var(--glow);
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      text-shadow: 0 0 15px rgba(0,229,255,.4);
+      margin-bottom: 10px;
+    }
 
-      .logo {
-        width: clamp(220px, 60vw, 480px);
-        margin-bottom: 30px;
-        opacity: 0;
-        transform: scale(0.9);
-        animation: fadeZoomIn 1.2s ease 0.2s forwards;
-        filter: drop-shadow(0 0 15px rgba(0, 229, 255, 0.4));
-        transition: transform 0.4s ease, filter 0.4s ease;
-      }
+    .subtitle {
+      font-size: clamp(1rem, 1.6vw, 1.1rem);
+      margin-bottom: 25px;
+    }
 
-      @keyframes fadeZoomIn {
-        to { opacity: 1; transform: scale(1); }
-      }
+    .description {
+      max-width: 650px;
+      margin: 0 auto 40px;
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #c9ecff;
+    }
+    .highlight { color: var(--glow); font-weight: 600; }
 
-      .logo:hover { transform: scale(1.05); filter: drop-shadow(0 0 25px rgba(0, 229, 255, 0.7)); }
+    .buttons {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+    }
+    @media (min-width: 768px) {
+      .buttons { flex-direction: row; justify-content: center; gap: 25px; }
+    }
 
-      h1 {
-        font-family: 'Orbitron', sans-serif;
-        font-size: clamp(1.8rem, 3vw, 2.8rem);
-        color: var(--glow);
-        text-shadow: 0 0 15px rgba(0,229,255,0.4);
-        margin-bottom: 10px;
-        opacity: 0;
-        animation: fadeSlideIn 1s ease 0.6s forwards;
-      }
+    .whatsapp {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: var(--accent);
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: clamp(1rem, 1.5vw, 1.2rem);
+      padding: 14px 28px;
+      border-radius: 50px;
+      transition: all .3s ease;
+      box-shadow: 0 0 15px rgba(37,211,102,0.4);
+    }
+    .whatsapp:hover {
+      background: var(--accent-hover);
+      transform: translateY(-4px);
+      box-shadow: 0 0 25px rgba(37,211,102,0.6);
+    }
+    .whatsapp img { width: 26px; height: 26px; }
 
-      @keyframes fadeSlideIn {
-        from { opacity: 0; transform: translateY(15px); }
-        to { opacity: 1; transform: translateY(0); }
-      }
+    footer {
+      margin-top: 50px;
+      font-size: .9rem;
+      color: #c9ecff;
+    }
+  </style>
+</head>
 
-      p.subtitle {
-        opacity: 0;
-        font-size: clamp(1rem, 1.5vw, 1.1rem);
-        margin-bottom: 30px;
-        animation: fadeSlideIn 1s ease 1s forwards;
-      }
+<body>
+  <canvas id="particles"></canvas>
 
-      .description {
-        max-width: 700px;
-        opacity: 0;
-        animation: fadeSlideIn 1s ease 1.3s forwards;
-        margin-bottom: 50px;
-        font-size: 1rem;
-        line-height: 1.6;
-        color: #c9ecff;
-      }
+  <main>
+    <img src="RASSAN.png" alt="RASSAN Sistemas" class="logo" />
+    <h1>RASSAN Sistemas</h1>
+    <p class="subtitle" id="typing"></p>
 
-      .highlight {
-        color: var(--glow);
-        font-weight: 600;
-      }
+    <p class="description">
+      En <span class="highlight">RASSAN Sistemas</span> potenciamos tu negocio con soluciones tecnológicas
+      confiables y personalizadas. Ofrecemos <span class="highlight">seguridad, redes y soporte integral</span> 
+      para empresas y hogares en <span class="highlight">Carcarañá y alrededores</span>.<br><br>
+      📞 <b>Contactanos hoy</b> y descubrí cómo optimizar tu sistema.
+    </p>
 
-      .buttons {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 18px;
-        width: 100%;
-        opacity: 0;
-        animation: fadeSlideIn 1s ease 1.6s forwards;
-      }
+    <div class="buttons">
+      <a href="https://wa.me/3416641907" class="whatsapp" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"> Contactar a Edgardo
+      </a>
+      <a href="https://wa.me/3413573844" class="whatsapp" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"> Contactar a Agustín
+      </a>
+    </div>
 
-      .whatsapp {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 12px;
-        text-decoration: none;
-        color: white;
-        background: var(--accent);
-        font-weight: 600;
-        font-size: clamp(1rem, 2vw, 1.2rem);
-        padding: 14px 32px;
-        border-radius: 50px;
-        transition: all 0.3s ease;
-        box-shadow: 0 0 12px rgba(37, 211, 102, 0.4);
-        width: clamp(220px, 50%, 280px);
-      }
+    <footer>© 2025 RASSAN Sistemas — Innovación, seguridad y tecnología</footer>
+  </main>
 
-      .whatsapp:hover {
-        background: var(--accent-hover);
-        transform: translateY(-4px) scale(1.04);
-        box-shadow: 0 0 25px rgba(37, 211, 102, 0.6);
-      }
+  <script>
+    const c = document.getElementById('particles'), x = c.getContext('2d');
+    let p = [];
+    const resize = () => (c.width = innerWidth, c.height = innerHeight);
+    addEventListener('resize', resize); resize();
+    for (let i=0;i<70;i++) p.push({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*2+0.5,dx:(Math.random()-.5)*.6,dy:(Math.random()-.5)*.6,a:Math.random()*.5+.3});
+    (function anim(){x.clearRect(0,0,c.width,c.height);p.forEach(o=>{x.beginPath();x.arc(o.x,o.y,o.r,0,6.28);x.fillStyle=`rgba(0,229,255,${o.a})`;x.fill();o.x+=o.dx;o.y+=o.dy;if(o.x<0||o.x>c.width)o.dx*=-1;if(o.y<0||o.y>c.height)o.dy*=-1});requestAnimationFrame(anim)})();
 
-      .whatsapp img { width: 28px; height: 28px; }
-
-      footer {
-        margin-top: 60px;
-        font-size: 0.9rem;
-        opacity: 0;
-        animation: fadeSlideIn 1s ease 2s forwards;
-      }
-
-      @media (min-width: 900px) {
-        .buttons { flex-direction: row; justify-content: center; gap: 26px; }
-      }
-
-      @media (max-width: 600px) {
-        main { padding: 40px 22px; }
-        .logo { width: 85%; margin-bottom: 20px; }
-        footer { margin-top: 40px; }
-      }
-    </style>
-  </head>
-
-  <body>
-    <canvas id="particles"></canvas>
-
-    <main>
-      <img src="RASSAN.png" alt="RASSAN Sistemas" class="logo" />
-      <h1>RASSAN Sistemas</h1>
-      <p class="subtitle" id="typing"></p>
-
-      <p class="description">
-        En <span class="highlight">RASSAN Sistemas</span> impulsamos tu negocio con soluciones tecnológicas 
-        confiables y personalizadas. Brindamos <span class="highlight">seguridad, redes y soporte integral</span> 
-        para empresas y hogares en <span class="highlight">Carcarañá y alrededores</span>.  
-        <br><br>📞 Contactanos hoy y descubrí cómo podemos optimizar tu sistema.
-      </p>
-
-      <div class="buttons">
-        <a href="https://wa.me/3416641907" class="whatsapp" target="_blank" rel="noopener noreferrer">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
-          Contactar a Edgardo
-        </a>
-
-        <a href="https://wa.me/3413573844" class="whatsapp" target="_blank" rel="noopener noreferrer">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
-          Contactar a Agustín
-        </a>
-      </div>
-
-      <footer>
-        <p>© 2025 RASSAN Sistemas — Innovación, seguridad y tecnología en tu entorno</p>
-      </footer>
-    </main>
-
-    <script>
-      const canvas = document.getElementById('particles');
-      const ctx = canvas.getContext('2d');
-      let particles = [];
-
-      function resize() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-      }
-      window.addEventListener('resize', resize);
-      resize();
-
-      for (let i = 0; i < 80; i++) {
-        particles.push({
-          x: Math.random() * canvas.width,
-          y: Math.random() * canvas.height,
-          r: Math.random() * 2 + 0.5,
-          dx: (Math.random() - 0.5) * 0.6,
-          dy: (Math.random() - 0.5) * 0.6,
-          alpha: Math.random() * 0.5 + 0.3
-        });
-      }
-
-      function animate() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        for (let p of particles) {
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(0, 229, 255, ${p.alpha})`;
-          ctx.fill();
-          p.x += p.dx;
-          p.y += p.dy;
-          if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
-          if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
-        }
-        requestAnimationFrame(animate);
-      }
-      animate();
-
-      const text = "Tecnología que impulsa tu crecimiento";
-      const subtitle = document.getElementById("typing");
-      let i = 0;
-      function typingEffect() {
-        if (i < text.length) {
-          subtitle.textContent += text.charAt(i);
-          i++;
-          setTimeout(typingEffect, 50);
-        }
-      }
-      setTimeout(typingEffect, 1200);
-    </script>
-  </body>
+    const t = "Tecnología que impulsa tu crecimiento", el = document.getElementById("typing");
+    let i=0; (function type(){ if(i<t.length){ el.textContent += t[i++]; setTimeout(type,50);} })();
+  </script>
+</body>
 </html>
