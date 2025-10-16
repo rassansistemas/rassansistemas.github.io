@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>RASSAN Sistemas</title>
+    <title>RASSAN Sistemas — Innovación y Tecnología</title>
 
     <!-- Fuentes modernas -->
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Inter:wght@400;600&display=swap" rel="stylesheet" />
@@ -21,11 +21,7 @@
         --border: rgba(0, 229, 255, 0.2);
       }
 
-      * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-      }
+      * { box-sizing: border-box; margin: 0; padding: 0; }
 
       body {
         font-family: 'Inter', sans-serif;
@@ -41,14 +37,11 @@
         padding: 20px;
       }
 
-      /* --- Fondo animado dinámico --- */
       body::before {
         content: "";
         position: fixed;
-        top: 0;
-        left: 0;
-        width: 200%;
-        height: 200%;
+        top: 0; left: 0;
+        width: 200%; height: 200%;
         background: linear-gradient(-45deg, var(--bg1), var(--bg2), var(--bg3), var(--bg2));
         background-size: 400% 400%;
         animation: gradientShift 15s ease infinite;
@@ -63,15 +56,12 @@
 
       canvas#particles {
         position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
         z-index: -1;
         pointer-events: none;
       }
 
-      /* --- Contenedor principal --- */
       main {
         position: relative;
         z-index: 1;
@@ -90,7 +80,6 @@
         animation: fadeInUp 1.4s ease both;
       }
 
-      /* --- Animaciones de aparición --- */
       @keyframes fadeInUp {
         0% { opacity: 0; transform: translateY(40px); }
         100% { opacity: 1; transform: translateY(0); }
@@ -98,7 +87,7 @@
 
       .logo {
         width: clamp(220px, 60vw, 480px);
-        margin-bottom: 40px;
+        margin-bottom: 30px;
         opacity: 0;
         transform: scale(0.9);
         animation: fadeZoomIn 1.2s ease 0.2s forwards;
@@ -107,16 +96,10 @@
       }
 
       @keyframes fadeZoomIn {
-        to {
-          opacity: 1;
-          transform: scale(1);
-        }
+        to { opacity: 1; transform: scale(1); }
       }
 
-      .logo:hover {
-        transform: scale(1.05);
-        filter: drop-shadow(0 0 25px rgba(0, 229, 255, 0.7));
-      }
+      .logo:hover { transform: scale(1.05); filter: drop-shadow(0 0 25px rgba(0, 229, 255, 0.7)); }
 
       h1 {
         font-family: 'Orbitron', sans-serif;
@@ -136,8 +119,23 @@
       p.subtitle {
         opacity: 0;
         font-size: clamp(1rem, 1.5vw, 1.1rem);
-        margin-bottom: 50px;
+        margin-bottom: 30px;
         animation: fadeSlideIn 1s ease 1s forwards;
+      }
+
+      .description {
+        max-width: 700px;
+        opacity: 0;
+        animation: fadeSlideIn 1s ease 1.3s forwards;
+        margin-bottom: 50px;
+        font-size: 1rem;
+        line-height: 1.6;
+        color: #c9ecff;
+      }
+
+      .highlight {
+        color: var(--glow);
+        font-weight: 600;
       }
 
       .buttons {
@@ -147,7 +145,7 @@
         gap: 18px;
         width: 100%;
         opacity: 0;
-        animation: fadeSlideIn 1s ease 1.4s forwards;
+        animation: fadeSlideIn 1s ease 1.6s forwards;
       }
 
       .whatsapp {
@@ -173,38 +171,23 @@
         box-shadow: 0 0 25px rgba(37, 211, 102, 0.6);
       }
 
-      .whatsapp img {
-        width: 28px;
-        height: 28px;
-      }
+      .whatsapp img { width: 28px; height: 28px; }
 
       footer {
         margin-top: 60px;
         font-size: 0.9rem;
         opacity: 0;
-        animation: fadeSlideIn 1s ease 1.8s forwards;
+        animation: fadeSlideIn 1s ease 2s forwards;
       }
 
-      /* --- Responsive --- */
       @media (min-width: 900px) {
-        .buttons {
-          flex-direction: row;
-          justify-content: center;
-          gap: 26px;
-        }
+        .buttons { flex-direction: row; justify-content: center; gap: 26px; }
       }
 
       @media (max-width: 600px) {
-        main {
-          padding: 40px 22px;
-        }
-        .logo {
-          width: 85%;
-          margin-bottom: 30px;
-        }
-        footer {
-          margin-top: 40px;
-        }
+        main { padding: 40px 22px; }
+        .logo { width: 85%; margin-bottom: 20px; }
+        footer { margin-top: 40px; }
       }
     </style>
   </head>
@@ -216,6 +199,13 @@
       <img src="RASSAN.png" alt="RASSAN Sistemas" class="logo" />
       <h1>RASSAN Sistemas</h1>
       <p class="subtitle" id="typing"></p>
+
+      <p class="description">
+        En <span class="highlight">RASSAN Sistemas</span> impulsamos tu negocio con soluciones tecnológicas 
+        confiables y personalizadas. Brindamos <span class="highlight">seguridad, redes y soporte integral</span> 
+        para empresas y hogares en <span class="highlight">Carcarañá y alrededores</span>.  
+        <br><br>📞 Contactanos hoy y descubrí cómo podemos optimizar tu sistema.
+      </p>
 
       <div class="buttons">
         <a href="https://wa.me/3416641907" class="whatsapp" target="_blank" rel="noopener noreferrer">
@@ -230,11 +220,10 @@
       </div>
 
       <footer>
-        <p>© 2025 RASSAN Sistemas — Carcarañá y alrededores</p>
+        <p>© 2025 RASSAN Sistemas — Innovación, seguridad y tecnología en tu entorno</p>
       </footer>
     </main>
 
-    <!-- Fondo de partículas -->
     <script>
       const canvas = document.getElementById('particles');
       const ctx = canvas.getContext('2d');
@@ -274,8 +263,7 @@
       }
       animate();
 
-      /* Efecto de texto “escritura digital” */
-      const text = "Soluciones tecnológicas — Innovación local";
+      const text = "Tecnología que impulsa tu crecimiento";
       const subtitle = document.getElementById("typing");
       let i = 0;
       function typingEffect() {
@@ -285,7 +273,7 @@
           setTimeout(typingEffect, 50);
         }
       }
-      setTimeout(typingEffect, 1400);
+      setTimeout(typingEffect, 1200);
     </script>
   </body>
 </html>
