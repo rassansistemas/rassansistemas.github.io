@@ -51,7 +51,7 @@
       border-radius: 22px;
       backdrop-filter: blur(20px) saturate(160%);
       box-shadow: 0 0 60px rgba(0, 229, 255, 0.15), inset 0 0 50px rgba(0, 229, 255, 0.08);
-      padding: 60px 40px;
+      padding: 40px 25px;
       width: min(90%, 900px);
       margin: 0 auto;
       transition: transform 0.5s ease;
@@ -67,11 +67,12 @@
 
     .logo {
       width: 80%;
-      max-width: 500px;
+      max-width: 400px;
       animation: floatLogo 6s ease-in-out infinite, glow 3s ease-in-out infinite alternate, fadeIn 2s ease forwards;
       filter: drop-shadow(0 0 25px rgba(0,229,255,0.6));
       transform: perspective(800px) rotateY(0deg);
       transition: transform 0.3s ease;
+      margin: 0 auto;
     }
 
     .logo:hover {
@@ -92,10 +93,9 @@
     h1 {
       font-family: "Orbitron", sans-serif;
       color: var(--glow);
-      font-size: clamp(2.2rem, 3.5vw, 3rem);
+      font-size: clamp(2rem, 4vw, 3rem);
       text-shadow: 0 0 25px rgba(0,229,255,0.7), 0 0 50px rgba(0,229,255,0.3);
-      margin-top: 20px;
-      margin-bottom: 10px;
+      margin: 20px 0 10px;
       opacity: 0;
       animation: fadeInUp 1.5s ease forwards, blink 2s infinite alternate;
       animation-delay: 0.5s;
@@ -107,7 +107,7 @@
     }
 
     .subtitle {
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       color: #aee6ff;
       margin-bottom: 25px;
       opacity: 0;
@@ -116,11 +116,11 @@
     }
 
     .description {
-      font-size: 1rem;
-      line-height: 1.7;
+      font-size: 0.95rem;
+      line-height: 1.6;
       color: #c9ecff;
-      max-width: 650px;
-      margin: 0 auto 45px;
+      max-width: 95%;
+      margin: 0 auto 40px;
       opacity: 0;
       animation: fadeInUp 1.5s ease forwards;
       animation-delay: 1.5s;
@@ -133,8 +133,8 @@
     }
 
     footer {
-      margin-top: 60px;
-      font-size: 0.9rem;
+      margin-top: 40px;
+      font-size: 0.85rem;
       color: #aee6ff;
       text-shadow: 0 0 6px rgba(0,229,255,0.2);
       opacity: 0;
@@ -145,13 +145,13 @@
     .cta {
       background: linear-gradient(90deg, #00cfff, #00ffa6);
       color: #001d3d;
-      padding: 14px 28px;
+      padding: 12px 25px;
       border-radius: 50px;
       text-decoration: none;
       font-weight: 700;
       display: inline-block;
-      margin-top: 25px;
-      box-shadow: 0 0 25px rgba(0,255,255,0.5);
+      margin-top: 20px;
+      box-shadow: 0 0 20px rgba(0,255,255,0.5);
       transition: all 0.3s ease;
       animation: pulse 2.5s infinite, fadeInUp 1.5s ease forwards;
       animation-delay: 2s;
@@ -161,15 +161,15 @@
     .cta:hover {
       transform: scale(1.08);
       background: linear-gradient(90deg, #00ffa6, #00cfff);
-      box-shadow: 0 0 45px rgba(0,255,255,0.8);
+      box-shadow: 0 0 35px rgba(0,255,255,0.8);
     }
 
     @keyframes pulse {
-      0%, 100% { box-shadow: 0 0 20px rgba(0,255,255,0.3); }
-      50% { box-shadow: 0 0 40px rgba(0,255,255,0.8); }
+      0%, 100% { box-shadow: 0 0 15px rgba(0,255,255,0.3); }
+      50% { box-shadow: 0 0 35px rgba(0,255,255,0.8); }
     }
 
-    /* WhatsApp flotante con posición relativa y flex fija */
+    /* WhatsApp flotante responsive */
     .whatsapp-container {
       position: fixed;
       bottom: 25px;
@@ -178,6 +178,7 @@
       flex-direction: column;
       gap: 12px;
       z-index: 100;
+      align-items: flex-end;
     }
 
     .whatsapp-float {
@@ -242,11 +243,29 @@
       .whatsapp-container {
         bottom: 15px;
         right: 15px;
-        flex-direction: column;
+        gap: 10px;
         align-items: flex-end;
       }
-      .whatsapp-float { padding: 8px 12px; font-size: 0.8rem; }
-      .whatsapp-float img { width: 24px; height: 24px; }
+
+      .whatsapp-float {
+        padding: 8px 12px;
+        font-size: 0.8rem;
+        gap: 6px;
+      }
+
+      .whatsapp-float img {
+        width: 24px;
+        height: 24px;
+      }
+
+      main {
+        padding: 25px 15px;
+        width: 95%;
+      }
+
+      h1 { font-size: clamp(1.8rem, 5vw, 2.5rem); }
+      .subtitle { font-size: 1rem; }
+      .description { font-size: 0.9rem; }
     }
   </style>
 </head>
