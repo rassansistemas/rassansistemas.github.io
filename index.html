@@ -35,9 +35,9 @@
       text-align: center;
       padding: 20px;
       position: relative;
+      perspective: 1000px;
     }
 
-    /* Fondo animado */
     body::before {
       content: "";
       position: fixed;
@@ -48,11 +48,10 @@
       z-index: -3;
     }
     @keyframes moveBg { 
-      0%,100%{background-position:0 50%} 
-      50%{background-position:100% 50%} 
+      0%,100% { background-position:0 50% } 
+      50% { background-position:100% 50% } 
     }
 
-    /* Capa de líneas energéticas */
     body::after {
       content: "";
       position: fixed;
@@ -64,7 +63,7 @@
         transparent 1px,
         transparent 100px
       );
-      animation: moveLines 20s linear infinite;
+      animation: moveLines 25s linear infinite;
       z-index: -2;
     }
     @keyframes moveLines {
@@ -75,30 +74,34 @@
     canvas#particles {
       position: fixed;
       inset: 0;
-      width: 100%; height: 100%;
+      width: 100%;
+      height: 100%;
       pointer-events: none;
       z-index: -1;
-      opacity: 0.7;
+      opacity: 0.8;
     }
 
     main {
       background: var(--glass);
       border: 1px solid var(--border);
       border-radius: 22px;
-      backdrop-filter: blur(18px) saturate(160%);
-      box-shadow: 0 0 50px rgba(0, 229, 255, 0.1), inset 0 0 40px rgba(0, 229, 255, 0.08);
+      backdrop-filter: blur(20px) saturate(160%);
+      box-shadow: 0 0 60px rgba(0, 229, 255, 0.15), inset 0 0 50px rgba(0, 229, 255, 0.08);
       padding: 60px 40px;
-      width: min(90%, 820px);
-      animation: fadeUp 1.2s ease both;
+      width: min(90%, 850px);
+      animation: fadeUp 1.5s ease both;
+      transform-style: preserve-3d;
+      transform: translateY(60px) scale(0.9) rotateX(10deg);
+      animation: appear3D 2s ease forwards;
       position: relative;
       overflow: hidden;
     }
-    @keyframes fadeUp { 
-      from {opacity:0; transform:translateY(50px) scale(0.98);} 
-      to {opacity:1; transform:none;} 
+
+    @keyframes appear3D {
+      0% { opacity: 0; transform: translateY(100px) scale(0.8) rotateX(20deg); }
+      100% { opacity: 1; transform: none; }
     }
 
-    /* Halo dinámico detrás del main */
     main::before {
       content: "";
       position: absolute;
@@ -106,8 +109,8 @@
       height: 200%;
       top: -50%;
       left: -50%;
-      background: conic-gradient(from 0deg, transparent 0%, rgba(0,229,255,0.15) 20%, transparent 40%);
-      animation: rotateHalo 10s linear infinite;
+      background: conic-gradient(from 0deg, transparent 0%, rgba(0,229,255,0.1) 25%, transparent 50%);
+      animation: rotateHalo 12s linear infinite;
       z-index: -1;
     }
     @keyframes rotateHalo {
@@ -116,29 +119,36 @@
     }
 
     .logo {
-      width: clamp(260px, 60vw, 500px);
+      width: clamp(260px, 60vw, 520px);
       margin-bottom: 30px;
       filter: drop-shadow(0 0 30px rgba(0,229,255,0.6));
-      transition: transform .4s ease, filter .4s ease;
+      transition: transform .6s ease, filter .6s ease;
     }
-    .logo:hover { transform: scale(1.08); filter: drop-shadow(0 0 50px rgba(0,229,255,0.9)); }
+    .logo:hover { transform: scale(1.08) rotateY(10deg); filter: drop-shadow(0 0 50px rgba(0,229,255,0.9)); }
 
+    /* === TÍTULO CON EFECTO DE PARPADEO === */
     h1 {
       font-family: "Orbitron", sans-serif;
       color: var(--glow);
-      font-size: clamp(2rem, 3.2vw, 2.8rem);
-      text-shadow: 0 0 20px rgba(0,229,255,0.5), 0 0 40px rgba(0,229,255,0.2);
+      font-size: clamp(2.1rem, 3.5vw, 3rem);
+      text-shadow: 0 0 25px rgba(0,229,255,0.7), 0 0 50px rgba(0,229,255,0.3);
       margin-bottom: 12px;
       letter-spacing: 1px;
-      animation: flicker 3s infinite;
+      animation: hologlow 4s ease-in-out infinite, blink 2.5s ease-in-out infinite;
     }
-    @keyframes flicker {
-      0%, 18%, 22%, 25%, 53%, 57%, 100% { opacity: 1; }
-      20%, 24%, 55% { opacity: 0.6; }
+
+    @keyframes hologlow {
+      0%,100% { filter: hue-rotate(0deg) brightness(1); }
+      50% { filter: hue-rotate(45deg) brightness(1.3); }
+    }
+
+    @keyframes blink {
+      0%, 90%, 100% { opacity: 1; text-shadow: 0 0 25px rgba(0,229,255,0.7), 0 0 50px rgba(0,229,255,0.3); }
+      92%, 96% { opacity: 0.4; text-shadow: 0 0 5px rgba(0,229,255,0.2); }
     }
 
     .subtitle {
-      font-size: clamp(1.1rem, 1.6vw, 1.2rem);
+      font-size: clamp(1.1rem, 1.8vw, 1.2rem);
       margin-bottom: 25px;
       color: #aee6ff;
       text-shadow: 0 0 10px rgba(0,229,255,0.4);
@@ -181,7 +191,7 @@
     .whatsapp:hover {
       background: linear-gradient(90deg, var(--accent-hover), #3cff8a);
       transform: translateY(-4px) scale(1.05);
-      box-shadow: 0 0 30px rgba(37,211,102,0.7);
+      box-shadow: 0 0 35px rgba(37,211,102,0.8);
     }
     .whatsapp img { width: 26px; height: 26px; filter: drop-shadow(0 0 5px rgba(0,0,0,0.3)); }
 
@@ -191,13 +201,36 @@
       color: #aee6ff;
       text-shadow: 0 0 6px rgba(0,229,255,0.2);
     }
+
+    /* Control de sonido */
+    #soundControl {
+      position: fixed;
+      top: 20px;
+      right: 25px;
+      background: var(--glass);
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(0,229,255,0.3);
+      transition: all .3s ease;
+      backdrop-filter: blur(10px);
+      z-index: 10;
+    }
+    #soundControl:hover { box-shadow: 0 0 25px rgba(0,229,255,0.6); transform: scale(1.1); }
   </style>
 </head>
 
 <body>
   <canvas id="particles"></canvas>
 
-  <main>
+  <div id="soundControl" title="Activar / Desactivar sonido">🔊</div>
+
+  <main id="main">
     <img src="RASSAN.png" alt="RASSAN Sistemas" class="logo" />
     <h1>RASSAN Sistemas</h1>
     <p class="subtitle" id="typing"></p>
@@ -221,14 +254,18 @@
     <footer>© 2025 RASSAN Sistemas — Innovación, seguridad y tecnología</footer>
   </main>
 
+  <audio id="bgSound" loop>
+    <source src="https://cdn.pixabay.com/download/audio/2021/09/27/audio_4e5e34f418.mp3?filename=ambient-futuristic-soundscape-10207.mp3" type="audio/mpeg">
+  </audio>
+
   <script>
-    // Partículas animadas
+    // === Partículas ===
     const c = document.getElementById('particles'), x = c.getContext('2d');
     let p = [];
     const resize = () => (c.width = innerWidth, c.height = innerHeight);
     addEventListener('resize', resize); resize();
-    for (let i=0;i<90;i++) 
-      p.push({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*2+0.5,dx:(Math.random()-.5)*.4,dy:(Math.random()-.5)*.4,a:Math.random()*.5+.3});
+    for (let i=0;i<100;i++) 
+      p.push({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*2+0.5,dx:(Math.random()-.5)*.5,dy:(Math.random()-.5)*.5,a:Math.random()*.5+.3});
     (function anim(){
       x.clearRect(0,0,c.width,c.height);
       p.forEach(o=>{
@@ -243,12 +280,27 @@
       requestAnimationFrame(anim);
     })();
 
-    // Efecto typing
+    // === Efecto typing ===
     const t = "Tecnología que impulsa tu crecimiento 💡", el = document.getElementById("typing");
-    let i=0; 
-    (function type(){ 
-      if(i<t.length){ el.textContent += t[i++]; setTimeout(type,60);} 
-    })();
+    let i=0; (function type(){ if(i<t.length){ el.textContent += t[i++]; setTimeout(type,60);} })();
+
+    // === Parallax 3D ===
+    const main = document.getElementById('main');
+    document.addEventListener('mousemove', e => {
+      const xAxis = (window.innerWidth / 2 - e.pageX) / 50;
+      const yAxis = (window.innerHeight / 2 - e.pageY) / 50;
+      main.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+    });
+
+    // === Sonido ambiental ===
+    const sound = document.getElementById('bgSound');
+    const btn = document.getElementById('soundControl');
+    let playing = false;
+    btn.addEventListener('click', () => {
+      if(!playing) { sound.play(); btn.textContent = '🔈'; }
+      else { sound.pause(); btn.textContent = '🔊'; }
+      playing = !playing;
+    });
   </script>
 </body>
 </html>
